@@ -53,7 +53,7 @@
       </h2>
       <p class="text-sm text-zinc-400 leading-relaxed">
         Software engineer.<br>
-        Laravel & Node.js.<br>
+        Laravel &amp; Node.js.<br>
         Build → break → fix.
       </p>
     </div>
@@ -103,17 +103,34 @@ float">
 
   </div>
 
-  <!-- ROW 3 : SPOTIFY -->
-  <div class="bg-zinc-900 rounded-2xl overflow-hidden float">
-    <iframe
-      id="spotify"
-      title="Playlist"
-      class="w-full min-h-[360px]"
-      frameborder="0"
-      allow="autoplay; clipboard-write; encrypted-media; fullscreen; 
-picture-in-picture"
-      loading="lazy">
-    </iframe>
+  <!-- ROW 3 : MY TOP TRACKS (compact, single-track, auto-rotate every 5 minutes) -->
+  <div id="music-wrap" class="bg-zinc-900 rounded-2xl overflow-hidden float">
+    <div class="p-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <img id="track-art" src="" alt="art" class="w-14 h-14 rounded object-cover bg-zinc-800">
+        <div>
+          <h4 class="text-sm font-medium">My Top Tracks</h4>
+          <p id="track-title" class="text-xs text-zinc-300">—</p>
+          <p id="track-info" class="text-xs text-zinc-400">Track 0 of 0 — Auto-rotate 5s</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <a id="open-spotify" href="#" target="_blank" class="text-xs px-3 py-1 rounded bg-zinc-800 hover:bg-zinc-700 transition">Open in Spotify</a>
+      </div>
+    </div>
+
+    <div id="spotify-container" class="w-full border-t border-zinc-800">
+      <!-- compact single-track Spotify embed (height ~80px) -->
+      <iframe
+        id="spotify"
+        title="Track"
+        class="w-full h-[80px]"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+      </iframe>
+    </div>
   </div>
 
 </div>
@@ -123,11 +140,79 @@ picture-in-picture"
   lucide.createIcons();
 </script>
 
-<!-- SPOTIFY -->
+<!-- MUSIC: single-track embed with auto-rotate (5 minutes) and hidden full playlist -->
 <script>
-  const playlistId = '6JS56x2WiOFv3VccXEiAcp';
-  document.getElementById('spotify').src =
-    `https://open.spotify.com/embed/playlist/${playlistId}?theme=0`;
+  (function(){
+    // Replace these with your Spotify track IDs (no full URL). Order matters.
+    const topTracks = [
+      '3n3Ppam7vgaVa1iaRUc9Lp', // example
+      '0VjIjW4GlUZAMYd2vXMi3b', // example
+      '7qiZfU4dY1lWllzX7mPBI3'  // example
+    ];
+
+    const playlistId = '6JS56x2WiOFv3VccXEiAcp';
+    const iframe = document.getElementById('spotify');
+    const info = document.getElementById('track-info');
+    const art = document.getElementById('track-art');
+    const titleEl = document.getElementById('track-title');
+    const openSpotify = document.getElementById('open-spotify');
+
+    let idx = 0;
+    const intervalMs = 5 * 1000; // 5 seconds
+    let timer = null;
+    const metaCache = {};
+
+    async function fetchMeta(id) {
+      if (metaCache[id]) return metaCache[id];
+      try {
+        const res = await fetch(`https://open.spotify.com/oembed?url=https://open.spotify.com/track/${id}`);
+        if (!res.ok) throw new Error('oembed failed');
+        const j = await res.json();
+        const titleRaw = j.title || '';
+        const parts = titleRaw.split(' - ').length > 1 ? titleRaw.split(' - ') : titleRaw.split(' — ');
+        const track = parts[0] || titleRaw;
+        const artist = parts[1] || '';
+        const meta = { track, artist, thumb: j.thumbnail_url };
+        metaCache[id] = meta;
+        return meta;
+      } catch (e) {
+        return { track: '', artist: '', thumb: '' };
+      }
+    }
+
+    async function loadTrack(i) {
+      if (!topTracks.length) {
+        info.textContent = 'No tracks configured — add IDs in script';
+        iframe.src = '';
+        titleEl.textContent = '';
+        art.src = '';
+        return;
+      }
+      idx = (i + topTracks.length) % topTracks.length;
+      const id = topTracks[idx];
+      iframe.src = `https://open.spotify.com/embed/track/${id}?theme=0`;
+      openSpotify.href = `https://open.spotify.com/track/${id}`;
+      info.textContent = `Track ${idx+1} of ${topTracks.length} — Auto-rotate 5s`;
+      const meta = await fetchMeta(id);
+      titleEl.textContent = meta.track + (meta.artist ? ` — ${meta.artist}` : '');
+      if (meta.thumb) art.src = meta.thumb;
+    }
+
+    function startAuto() {
+      if (timer) clearInterval(timer);
+      timer = setInterval(() => loadTrack(idx + 1), intervalMs);
+    }
+
+    // no collapse / full-playlist behavior — compact single-track only
+
+    // init
+    if (topTracks.length) {
+      loadTrack(0);
+      startAuto();
+    } else {
+      info.textContent = 'No tracks configured — add IDs in script';
+    }
+  })();
 </script>
 
 <!-- MAP -->
