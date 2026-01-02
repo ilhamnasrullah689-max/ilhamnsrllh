@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -13,7 +14,7 @@
 
 <!-- Leaflet -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" 
-/>
+/> 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <style>
@@ -118,6 +119,15 @@ float">
       <div class="flex items-center gap-2">
         <a id="open-spotify" href="#" target="_blank" class="text-xs px-3 py-1 rounded bg-zinc-800 hover:bg-zinc-700 transition">Open in Spotify</a>
       </div>
+          <div class="flex items-center gap-2">
+            <label for="auto-interval" class="text-xs text-zinc-400">Auto</label>
+            <select id="auto-interval" class="text-xs bg-zinc-800 text-zinc-200 px-2 py-1 rounded">
+              <option value="5">5s</option>
+              <option value="10">10s</option>
+              <option value="20">20s</option>
+              <option value="60">60s</option>
+            </select>
+          </div>
     </div>
 
     <div id="spotify-container" class="w-full border-t border-zinc-800">
@@ -145,9 +155,16 @@ float">
   (function(){
     // Replace these with your Spotify track IDs (no full URL). Order matters.
     const topTracks = [
-      '3n3Ppam7vgaVa1iaRUc9Lp', // example
-      '0VjIjW4GlUZAMYd2vXMi3b', // example
-      '7qiZfU4dY1lWllzX7mPBI3'  // example
+      '5CNmH8vWVBaIlkNUbNBLVO',
+      '2CZ2f5buwvd9LCtHrrb0vl',
+      '6rH7DwITrq2MhxSSuL91r9',
+      '5fTf6UUW8Hc2OlXMbS677Q',
+      '04pLPqudepmNuWZ6q4LQjn',
+      '69kZsoRrSf7GBTSdJ4BjqA',
+      '0sHMmGcfDYvPzyQ5jzoDjz',
+      '2PsYDZV8rHT7zkPBnl8lY0',
+      '0i6m1MydEoIZEx2UEtnIdP',
+      '0wULafSHeHYZFu54R9ZFRJ'
     ];
 
     const playlistId = '6JS56x2WiOFv3VccXEiAcp';
@@ -158,7 +175,7 @@ float">
     const openSpotify = document.getElementById('open-spotify');
 
     let idx = 0;
-    const intervalMs = 5 * 1000; // 5 seconds
+    let intervalMs = 20 * 1000; // default 20 seconds
     let timer = null;
     const metaCache = {};
 
@@ -192,7 +209,8 @@ float">
       const id = topTracks[idx];
       iframe.src = `https://open.spotify.com/embed/track/${id}?theme=0`;
       openSpotify.href = `https://open.spotify.com/track/${id}`;
-      info.textContent = `Track ${idx+1} of ${topTracks.length} — Auto-rotate 5s`;
+        updateIntervalDisplay();
+        info.textContent = `Track ${idx+1} of ${topTracks.length} — Auto-rotate ${intervalMs / 1000}s`;
       const meta = await fetchMeta(id);
       titleEl.textContent = meta.track + (meta.artist ? ` — ${meta.artist}` : '');
       if (meta.thumb) art.src = meta.thumb;
@@ -201,6 +219,40 @@ float">
     function startAuto() {
       if (timer) clearInterval(timer);
       timer = setInterval(() => loadTrack(idx + 1), intervalMs);
+    }
+
+    function updateIntervalDisplay(){
+      const seconds = Math.round(intervalMs/1000);
+      info.textContent = `Track ${idx+1} of ${topTracks.length} — Auto-rotate ${seconds}s`;
+    }
+
+    function setAutoSeconds(sec){
+      intervalMs = sec * 1000;
+      if (timer) {
+        clearInterval(timer);
+        timer = setInterval(() => loadTrack(idx + 1), intervalMs);
+      }
+      updateIntervalDisplay();
+      try { localStorage.setItem('autoSeconds', String(sec)); } catch(e){}
+      const sel = document.getElementById('auto-interval');
+      if (sel) sel.value = String(sec);
+    }
+
+    // read saved preference
+    try{
+      const saved = localStorage.getItem('autoSeconds');
+      if (saved && !isNaN(Number(saved))) setAutoSeconds(Number(saved));
+      else setAutoSeconds(Math.round(intervalMs/1000));
+    }catch(e){ setAutoSeconds(Math.round(intervalMs/1000)); }
+
+    // wire select control
+    const autoSel = document.getElementById('auto-interval');
+    if (autoSel) {
+      autoSel.value = String(Math.round(intervalMs/1000));
+      autoSel.addEventListener('change', (ev)=>{
+        const v = Number(ev.target.value) || Math.round(intervalMs/1000);
+        setAutoSeconds(v);
+      });
     }
 
     // no collapse / full-playlist behavior — compact single-track only
