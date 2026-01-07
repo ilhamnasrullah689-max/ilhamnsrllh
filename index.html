@@ -271,17 +271,20 @@ float">
   const koordinatMalang = [-7.96318, 112.60837];
 
   const map = L.map('map', {
-    zoomControl: false,
+    zoomControl: true,        // Disarankan aktif agar mudah navigasi di level jauh
     attributionControl: false,
-    minZoom: 2,
-  }).setView(koordinatMalang, 3); // Center kamera sama dengan koordinat pin
+    minZoom: 1,               // Mengizinkan zoom paling jauh
+    maxBoundsViscosity: 1.0   // Menjaga peta tetap rapi saat digeser
+  }).setView(koordinatMalang, 2); // ZOOM 2: Menampilkan benua-benua di dunia
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
-    .addTo(map);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    noWrap: false             // Membiarkan peta menyambung secara horizontal
+  }).addTo(map);
 
-  // Menambahkan marker tepat di tengah layar
+  // Pin Malang tetap berada di tengah fokus kamera
   L.marker(koordinatMalang).addTo(map);
 </script>
+
 
 
 </body>
