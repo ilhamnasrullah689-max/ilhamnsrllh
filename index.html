@@ -271,7 +271,7 @@ float">
   const koordinatMalang = [-7.96318, 112.60837];
 
   const map = L.map('map', {
-    zoomControl: false,        // Disarankan aktif agar mudah navigasi di level jauh
+    zoomControl: true,        // Disarankan aktif agar mudah navigasi di level jauh
     attributionControl: false,
     minZoom: 1,               // Mengizinkan zoom paling jauh
     maxBoundsViscosity: 1.0   // Menjaga peta tetap rapi saat digeser
@@ -282,7 +282,7 @@ float">
   }).addTo(map);
 
   // Pin Malang tetap berada di tengah fokus kamera
-  L.marker(koordinatMalang).addTo(map);
+  L.marker(koordinatMalang).addTo(map);;
 </script>
 
 
