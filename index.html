@@ -278,7 +278,9 @@ float">
     .addTo(map);
 
   const lokasiMalang = ([-7.96318, 112.60837]);
-  L.marker(lokasiMalang).addTo(map);
+  L.marker(lokasiMalang).addTo(map)
+    .bindPopup('Malang, Indonesia')
+    .openPopup();
 </script>
 
 </body>
