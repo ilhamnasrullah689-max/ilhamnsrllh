@@ -269,14 +269,17 @@ float">
 <!-- MAP -->
 <script>
   const map = L.map('map', {
-    zoomControl: false,
+    zoomControl: true,
     attributionControl: false
-  }).setView([-7.96318, 112.60837], 13);
+  }).setView([-2.5, 118.0], 5);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
     .addTo(map);
 
-  L.marker([-7.96318, 112.60837]).addTo(map);
+  const lokasiMalang = ([-7.96318, 112.60837]);
+  L.marker(lokasiMalang).addTo(map)
+    .bindPopup('Malang, Indonesia')
+    .openPopup();
 </script>
 
 </body>
