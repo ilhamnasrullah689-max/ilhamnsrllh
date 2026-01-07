@@ -270,14 +270,14 @@ float">
 <script>
   const map = L.map('map', {
     zoomControl: false,
-    attributionControl: false,
-    minZoom: 3,
+    attributionControl: false, // <-- Tambahkan koma di sini
+    minZoom: 3,                // <-- Z harus kapital (minZoom)
   }).setView([-2.2, 118.0], 4);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
     .addTo(map);
 
-  const lokasiMalang = ([-7.96318, 112.60837]);
+  const lokasiMalang = [-7.96318, 112.60837]; // Hapus kurung tambahan () agar lebih bersih
   L.marker(lokasiMalang).addTo(map)
     .bindPopup('Malang, Indonesia')
     .openPopup();
