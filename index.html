@@ -271,29 +271,19 @@ float">
   const koordinatMalang = [-7.96318, 112.60837];
 
   const map = L.map('map', {
-    zoomControl: false,
+    zoomControl: false,        // Disarankan aktif agar mudah navigasi di level jauh
     attributionControl: false,
-    minZoom: 1,
-  }).setView(koordinatMalang, 2); // Zoom 2 untuk melihat benua atas-bawah
+    minZoom: 1,               // Mengizinkan zoom paling jauh
+    maxBoundsViscosity: 1.0   // Menjaga peta tetap rapi saat digeser
+  }).setView(koordinatMalang, 2); // ZOOM 2: Menampilkan benua-benua di dunia
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    noWrap: false             // Membiarkan peta menyambung secara horizontal
+  }).addTo(map);
 
-  // Custom konten Popup dengan style inline agar "apik"
-  const popupContent = `
-    <div style="text-align: center; line-height: 1.2;">
-      <b style="font-size: 16px; letter-spacing: 1px; display: block; color: #2c3e50;">MALANG</b>
-      <span style="font-size: 11px; color: #7f8c8d; font-weight: bold; text-transform: uppercase;">Indonesia</span>
-    </div>
-  `;
-
-  L.marker(koordinatMalang).addTo(map)
-    .bindPopup(popupContent, {
-      closeButton: false, // Menghilangkan tombol 'x' agar lebih bersih
-      minWidth: 100
-    })
-    .openPopup();
+  // Pin Malang tetap berada di tengah fokus kamera
+  L.marker(koordinatMalang).addTo(map);
 </script>
-
 
 
 
