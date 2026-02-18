@@ -69,7 +69,7 @@ const tracks: Track[] = [
 
 export default function RecentlyPlayed() {
   const [track, setTrack] = useState<Track | null>(null);
-  const intervalTime = 60 * 1000; // 60 detik
+  const intervalTime = 300 * 1000; // 
 
   useEffect(() => {
     // Set track random pertama di client
