@@ -2,8 +2,8 @@ import "leaflet/dist/leaflet.css"; // WAJIB untuk leaflet
 import "./globals.css";
 
 export const metadata = {
-  title: "ilhamnsrllh.",
-  description: "Personal Website of Ilham Nasrullah",
+  title: "Ilham Nasrullah",
+  description: "Fresh DevOps Engineer based in Malang, Indonesia.",
 };
 
 export default function RootLayout({
