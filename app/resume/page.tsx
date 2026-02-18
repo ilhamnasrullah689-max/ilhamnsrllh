@@ -62,10 +62,6 @@ export default function ResumePage() {
               "Cloud Infrastructure",
               "Docker & Kubernetes",
               "CI/CD Pipelines",
-              "Nginx & Apache",
-              "React & Next.js",
-              "Git & GitHub",
-              "JavaScript & TypeScript",
             ].map((skill) => (
               <span
                 key={skill}
