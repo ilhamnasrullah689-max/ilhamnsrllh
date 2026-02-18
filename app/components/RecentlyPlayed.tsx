@@ -7,127 +7,116 @@ interface Track {
   artists: string[];
 }
 
+// Playlist pop / indie / emo
 const tracks: Track[] = [
   // Perunggu
   { title: "Kalibata, 2012", artists: ["Perunggu"] },
   { title: "Haru Paling Biru", artists: ["Perunggu"] },
-  { title: "Sampai Habis", artists: ["Perunggu"] },
-  { title: "Langkah", artists: ["Perunggu"] },
-  { title: "Gelap", artists: ["Perunggu"] },
+  { title: "Amalan Baik", artists: ["Perunggu"] },
+  { title: "Pikiran Yang Matang", artists: ["Perunggu"] },
+  { title: "Gemilang", artists: ["Perunggu"] },
+  { title: "33x", artists: ["Perunggu"] },
+  { title: "Tapi", artists: ["Perunggu"] },
 
-  // Rumahsakit
-  { title: "Pop Kinetik", artists: ["Rumahsakit"] },
-  { title: "Duniawi", artists: ["Rumahsakit"] },
-  { title: "Anomali", artists: ["Rumahsakit"] },
+  // Bernadya
+  { title: "Untungnya, Hidup Harus Tetap Berjalan", artists: ["Bernadya"] },
+  { title: "Kini Mereka Tahu", artists: ["Bernadya"] },
+  { title: "Apa Mungkin", artists: ["Bernadya"] },
+  { title: "Teruslah", artists: ["Bernadya"] },
 
-  // Killing Me Inside
+  // Killing Me Inside: Reunion
   { title: "Home", artists: ["Killing Me Inside: Reunion"] },
   { title: "Sometimes", artists: ["Killing Me Inside: Reunion"] },
   { title: "Forever", artists: ["Killing Me Inside"] },
-
-  // Saosin
-  { title: "7 Years", artists: ["Saosin"] },
+  { title: "Diary of Pas Away", artists: ["Killing Me Inside"] },
+  { title: "Jangan Pergi", artists: ["Killing Me Inside ft. Tiffany Orie"] },
 
   // Pamungkas
   { title: "To The Bone", artists: ["Pamungkas"] },
+  { title: "One Only", artists: ["Pamungkas"] },
+  { title: "Kenangan Manis", artists: ["Pamungkas"] },
+  { title: "Flying Solo", artists: ["Pamungkas"] },
 
   // NIKI
   { title: "Heirloompain", artists: ["NIKI"] },
   { title: "Lullaby", artists: ["NIKI"] },
   { title: "La La Lost You", artists: ["NIKI"] },
   { title: "Lowkey", artists: ["NIKI"] },
-
-  // Bastille
-  { title: "Into The Night", artists: ["Bastille"] },
-
-  // Lord Huron
-  { title: "The Night We Met", artists: ["Lord Huron"] },
+  { title: "Indigo", artists: ["NIKI"] },
 
   // Troye Sivan
   { title: "Youth", artists: ["Troye Sivan"] },
+  { title: "The Good Side", artists: ["Troye Sivan"] },
+  { title: "Easy", artists: ["Troye Sivan"] },
 
-  // Ruth B.
-  { title: "Lost Boy", artists: ["Ruth B."] },
+  // Lord Huron
+  { title: "The Night We Met", artists: ["Lord Huron"] },
+  { title: "Time to Run", artists: ["Lord Huron"] },
+  { title: "Fool for Love", artists: ["Lord Huron"] },
 
-  // Aquilo
-  { title: "Silhouette", artists: ["Aquilo"] },
+  // Bastille
+  { title: "Into The Night", artists: ["Bastille"] },
+  { title: "Pompeii", artists: ["Bastille"] },
+  { title: "Good Grief", artists: ["Bastille"] },
 
-  // The Weeknd
-  { title: "Call Out My Name", artists: ["The Weeknd"] },
-
-  // Olivia Rodrigo
-  { title: "Drivers License", artists: ["Olivia Rodrigo"] },
-
-  // Hozier
-  { title: "Cherry Wine", artists: ["Hozier"] },
-
-  // Lewis Capaldi
+  // Emo Pop tambahan
+  { title: "Ocean Eyes", artists: ["Billie Eilish"] },
+  { title: "Lost Cause", artists: ["Billie Eilish"] },
   { title: "Before You Go", artists: ["Lewis Capaldi"] },
   { title: "Someone You Loved", artists: ["Lewis Capaldi"] },
-
-  // Billie Eilish
-  { title: "Ocean Eyes", artists: ["Billie Eilish"] },
-
-  // Ed Sheeran
-  { title: "Happier", artists: ["Ed Sheeran"] },
-
-  // Taylor Swift
-  { title: "Red", artists: ["Taylor Swift"] },
-  { title: "All Too Well", artists: ["Taylor Swift"] },
-
-  // John Mayer
-  { title: "New Light", artists: ["John Mayer"] },
-
-  // Bonus lagu lain untuk variasi
-  { title: "Gravity", artists: ["John Mayer"] },
-  { title: "Slow Dancing in a Burning Room", artists: ["John Mayer"] },
-  { title: "Something in the Way", artists: ["Nirvana"] },
-  { title: "Yellow", artists: ["Coldplay"] },
-  { title: "Fix You", artists: ["Coldplay"] },
+  { title: "Cherry Wine", artists: ["Hozier"] },
 ];
 
-
 export default function RecentlyPlayed() {
-  const [track, setTrack] = useState<Track>(tracks[0]);
-  const intervalTime = 60 * 1000;
+  const [track, setTrack] = useState<Track | null>(null);
+  const intervalTime = 60 * 1000; // 60 detik
 
   useEffect(() => {
+    // Set track random pertama di client
+    setTrack(tracks[Math.floor(Math.random() * tracks.length)]);
+
+    // Interval auto ganti tiap 60 detik
     const id = setInterval(() => {
-      const randomTrack =
-        tracks[Math.floor(Math.random() * tracks.length)];
-      setTrack(randomTrack);
+      setTrack(prev => {
+        let newTrack;
+        do {
+          newTrack = tracks[Math.floor(Math.random() * tracks.length)];
+        } while (prev && newTrack.title === prev.title);
+        return newTrack;
+      });
     }, intervalTime);
 
     return () => clearInterval(id);
   }, []);
 
   return (
-    <div className="flex justify-center mt-28"> {/* card turun lebih bawah */}
+    <div className="flex justify-center mt-28">
       <div className="relative max-w-[420px] p-3 flex items-start gap-3 rounded-2xl bg-transparent border-none">
-        
-        {/* Spotify Logo kecil */}
+        {/* Logo Spotify */}
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg"
           alt="Spotify Logo"
           className="w-5 h-5 mt-1"
         />
-
-        {/* Text container hampir sejajar dengan logo */}
         <div className="flex flex-col mt-0">
           <span className="text-xs text-zinc-400">
-            Recently Played · Offline
+            Recently Played . Offline
           </span>
-
           <div className="flex gap-2 items-center mt-1">
-            <span className="text-sm text-zinc-100 font-medium truncate">
-              {track.title}
-            </span>
-            <span className="text-sm text-zinc-400 truncate">
-              - {track.artists.join(", ")}
-            </span>
+            {track ? (
+              <>
+                <span className="text-sm text-zinc-100 font-medium truncate">
+                  {track.title}
+                </span>
+                <span className="text-sm text-zinc-400 truncate">
+                  - {track.artists.join(", ")}
+                </span>
+              </>
+            ) : (
+              <span className="text-sm text-zinc-400">Loading...</span>
+            )}
           </div>
         </div>
-
       </div>
     </div>
   );
