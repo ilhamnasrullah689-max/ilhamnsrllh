@@ -32,13 +32,13 @@ export default function MapInner() {
   return (
     <MapContainer
       center={koordinatMalang}
-      zoom={3} // zoom out supaya pulau Indonesia terlihat
+      zoom={3}
       scrollWheelZoom={true}
       className="w-full h-full rounded-2xl"
       attributionControl={false}
       zoomControl={false}
     >
-      {/* Dark silver / black map */}
+      {/* Dark map */}
       <TileLayer
         url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>'
@@ -58,19 +58,16 @@ export default function MapInner() {
         }}
       >
         {showLabel && (
-          <Tooltip
-            direction="bottom"
-            permanent
-            className="text-xs font-semibold border-none shadow-none bg-transparent text-[#e8e6df]"
-            offset={[0, 15]}
-            interactive={false}
-            style={{
-              color: "#FFFFFF",
-              textShadow: `0 0 2px #FFFFFF, 0 0 8px #FFFFFF`,
-            }}
-          >
-            Malang, Indonesia
-          </Tooltip>
+        <Tooltip
+          direction="bottom"
+          permanent
+          className="text-white font-semibold drop-shadow-[0_0_2px_white]"
+          offset={[0, 15]}
+          interactive={false}
+      >
+        Malang, Indonesia
+        </Tooltip>
+
         )}
       </CircleMarker>
     </MapContainer>

@@ -87,3 +87,11 @@ body {
 .leaflet-tooltip::before {
   display: none;
 }
+
+/* hilangkan background dan border default tooltip Leaflet */
+.leaflet-tooltip {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}

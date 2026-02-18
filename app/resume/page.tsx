@@ -4,7 +4,7 @@ import { Mail, Globe, MapPin } from "lucide-react";
 
 export default function ResumePage() {
   return (
-    <main className="min-h-screen bg-[#f5f5f5] font-mono text-[#0b0b0c] flex justify-center p-4 text-base">
+    <main className="min-h-screen bg-[#f5f5f5] font-mono text-[#0b0b0c] flex justify-center p-4 sm:p-6 text-base">
 
       {/* BACK LINK */}
       <a
@@ -15,20 +15,20 @@ export default function ResumePage() {
       </a>
 
       {/* CONTAINER FLAT */}
-      <div className="w-full max-w-[680px] mt-20 space-y-12">
+      <div className="w-full max-w-[680px] mt-20 space-y-12 px-4 sm:px-6">
 
         {/* ABOUT */}
         <section className="space-y-4">
-          <h1 className="text-2xl font-medium tracking-tight">
+          <h1 className="text-xl sm:text-2xl font-medium tracking-tight">
             Ilham Nasrullah{" "}
             <span className="text-zinc-600 font-normal"> as a DevOps Engineer Jr.</span>
           </h1>
 
-          <p className="leading-relaxed text-[#0b0b0c]">
-            I am focuses on cloud infrastructure, containerization, and automating CI/CD pipelines to build reliable and scalable systems.
+          <p className="leading-relaxed text-[#0b0b0c] text-sm sm:text-base">
+            I focus on cloud infrastructure, containerization, and automating CI/CD pipelines to build reliable and scalable systems.
           </p>
 
-          <div className="flex flex-wrap gap-6 text-sm text-zinc-600">
+          <div className="flex flex-wrap gap-6 text-sm text-zinc-600 justify-start">
             <div className="flex items-center gap-2">
               <MapPin size={16} />
               <span>Malang, Indonesia</span>
@@ -46,8 +46,8 @@ export default function ResumePage() {
 
         {/* SKILLS */}
         <section className="space-y-4">
-          <h2 className="text-lg font-semibold text-[#0b0b0c]">Skills</h2>
-          <div className="flex flex-wrap gap-3 text-sm">
+          <h2 className="text-lg sm:text-xl font-semibold text-[#0b0b0c]">Skills</h2>
+          <div className="flex flex-wrap gap-3 text-sm justify-start">
             {[
               "Linux Fundamentals",
               "Cloud Infrastructure",
@@ -60,7 +60,7 @@ export default function ResumePage() {
             ].map(skill => (
               <span
                 key={skill}
-                className="px-2 py-1 rounded bg-[#e0e0e0] text-[#0b0b0c]"
+                className="px-2 py-1 rounded bg-[#e0e0e0] text-[#0b0b0c] text-xs sm:text-sm"
               >
                 {skill}
               </span>
@@ -70,11 +70,11 @@ export default function ResumePage() {
 
         {/* WORK EXPERIENCE */}
         <section className="space-y-4">
-          <h2 className="text-lg font-semibold text-[#0b0b0c]">Work Experiences</h2>
+          <h2 className="text-lg sm:text-xl font-semibold text-[#0b0b0c]">Work Experiences</h2>
 
           <p className="font-medium text-[#0b0b0c]">Libuzo Zenith Tech. | Fulltime</p>
           <p className="text-sm text-zinc-600">DevOps Engineer Jr. 2025 – Present</p>
-          <p className="text-sm leading-relaxed text-[#0b0b0c]">
+          <p className="text-sm sm:text-base leading-relaxed text-[#0b0b0c]">
             Manage Linux servers, CI/CD pipelines, Docker/Kubernetes, and automation for reliable deployments.
           </p>
           <p className="text-sm text-zinc-500 italic">On going progress...</p>
@@ -82,8 +82,8 @@ export default function ResumePage() {
 
         {/* EDUCATION */}
         <section className="space-y-4">
-          <h2 className="text-lg font-semibold text-[#0b0b0c]">Education</h2>
-          <p className="text-sm text-[#0b0b0c]">
+          <h2 className="text-lg sm:text-xl font-semibold text-[#0b0b0c]">Education</h2>
+          <p className="text-sm sm:text-base text-[#0b0b0c]">
             State Islamic University - graduated 2021<br/>
             Bachelor’s Degree in Social Sciences Education
           </p>
@@ -91,12 +91,10 @@ export default function ResumePage() {
 
         {/* PROJECTS */}
         <section className="space-y-4">
-          <h2 className="text-lg font-semibold text-[#0b0b0c]">Projects</h2>
+          <h2 className="text-lg sm:text-xl font-semibold text-[#0b0b0c]">Projects</h2>
           <p className="font-medium text-[#0b0b0c]">My Personal Website</p>
-          <p className="text-sm leading-relaxed text-[#0b0b0c]">
-            A personal website built with Next.js, TailwindCSS, TypeScript, and Node. 
-            Managed via GitHub and deployed on Vercel. Serves as a hands-on environment 
-            to practice DevOps skills, including automated deployments, system setup, and production workflows.
+          <p className="text-sm sm:text-base leading-relaxed text-[#0b0b0c]">
+            A personal website built with Next.js, TailwindCSS, TypeScript, and Node.
           </p>
         </section>
 
