@@ -2,8 +2,8 @@ import "leaflet/dist/leaflet.css"; // WAJIB untuk leaflet
 import "./globals.css";
 
 export const metadata = {
-  title: "Ilham Nasrullah Personal Website",
-  description: "Map with React Leaflet",
+  title: "ilhamnsrllh.",
+  description: "Personal Website of Ilham Nasrullah",
 };
 
 export default function RootLayout({
