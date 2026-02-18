@@ -61,15 +61,11 @@ export default function MapInner() {
           <Tooltip
             direction="bottom"
             permanent
-            className="text-xs font-semibold border-none shadow-none bg-transparent text-white"
+            className="bg-[#0b0b0c] text-white px-2 py-1 rounded shadow-md text-xs font-semibold"
             offset={[0, 15]}
             interactive={false}
-            style={{
-              color: "#FFFFFF",
-              textShadow: `0 0 2px #FFFFFF, 0 0 8px #FFFFFF`,
-            }}
           >
-            Malang, Indonesia
+            <span>Malang, Indonesia</span> {/* wrap teks pakai span */}
           </Tooltip>
         )}
       </CircleMarker>
