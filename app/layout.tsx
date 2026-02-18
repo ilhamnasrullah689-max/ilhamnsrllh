@@ -2,7 +2,7 @@ import "leaflet/dist/leaflet.css"; // WAJIB untuk leaflet
 import "./globals.css";
 
 export const metadata = {
-  title: "My Map App",
+  title: "Ilham Nasrullah Personal Website",
   description: "Map with React Leaflet",
 };
 
