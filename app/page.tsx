@@ -24,8 +24,8 @@ export default function Home() {
               Ilham Nasrullah
             </h2>
             <p className="text-sm text-zinc-400 leading-relaxed">
-              DevOps Engineer.<br />
-              Automate → Secure → Scale.
+              Software Engineer.<br />
+              Design → Build → Ship.
             </p>
           </div>
 

@@ -22,13 +22,12 @@ export default function ResumePage() {
           <h1 className="text-lg sm:text-2xl font-medium tracking-tight leading-snug">
             Ilham Nasrullah{" "}
             <span className="text-zinc-600 font-normal">
-              as a DevOps Engineer Jr.
+              as a Software Engineer
             </span>
           </h1>
 
           <p className="leading-relaxed text-xs sm:text-base">
-            I focus on cloud infrastructure, containerization, and automating
-            CI/CD pipelines to build reliable and scalable systems.
+            Passionate about building efficient, scalable, and secure software solutions.
           </p>
 
           {/* CONTACT */}
@@ -57,11 +56,7 @@ export default function ResumePage() {
           </h2>
 
           <div className="flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm">
-            {[
-              "Linux Fundamentals",
-              "Cloud Infrastructure",
-              "Docker & Kubernetes",
-              "CI/CD Pipelines",
+            {["Next.js", "TailwindCSS", "TypeScript", "Node.js"
             ].map((skill) => (
               <span
                 key={skill}
@@ -76,7 +71,7 @@ export default function ResumePage() {
         {/* WORK EXPERIENCE */}
         <section className="space-y-3 sm:space-y-4">
           <h2 className="text-base sm:text-xl font-semibold">
-            Work Experience
+            Work Experiences
           </h2>
 
           <div className="space-y-2">
@@ -85,12 +80,11 @@ export default function ResumePage() {
             </p>
 
             <p className="text-xs sm:text-sm text-zinc-600">
-              DevOps Engineer Jr. · 2025 – Present
+              Software Engineer 2025 – Present
             </p>
 
             <p className="leading-relaxed text-xs sm:text-base">
-              Manage Linux servers, CI/CD pipelines, Docker/Kubernetes, and
-              automation for reliable deployments.
+              Currently working on developing and maintaining web applications using Next.js, TailwindCSS, TypeScript, and Node.js.
             </p>
 
             <p className="text-xs text-zinc-500 italic">
@@ -106,9 +100,9 @@ export default function ResumePage() {
           </h2>
 
           <p className="leading-relaxed text-xs sm:text-base">
-            State Islamic University — Graduated 2021
+            State Islamic University — Graduated in 2021
             <br />
-            Bachelor’s Degree in Social Sciences Education
+            Bachelor’s Degree in Social Sciences Edu.
           </p>
         </section>
 

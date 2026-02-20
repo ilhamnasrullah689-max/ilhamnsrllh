@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata = {
   title: "Ilham Nasrullah",
-  description: "Fresh DevOps Engineer based in Malang, Indonesia.",
+  description: "Software Engineer based in Malang, Indonesia.",
 };
 
 export default function RootLayout({
